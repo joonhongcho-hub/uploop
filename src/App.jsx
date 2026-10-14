@@ -1,122 +1,56 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import EntryList from "./components/EntryList";
+import { getDuration, formatDuration } from "./utils/time";
+
+const dummyEntries = [
+  {
+    id: 1,
+    date: "2026-10-12",
+    start: "06:00",
+    end: "06:50",
+    category: "코딩",
+    memo: "리액트 복습",
+  },
+  {
+    id: 2,
+    date: "2026-10-12",
+    start: "09:00",
+    end: "09:50",
+    category: "취업 준비",
+    memo: "물류관리 17장 정리",
+  },
+  {
+    id: 3,
+    date: "2026-10-12",
+    start: "21:00",
+    end: "22:00",
+    category: "독서",
+    memo: "소피의 세계 읽기",
+  },
+  {
+    id: 4,
+    date: "2026-10-13",
+    start: "06:00",
+    end: "06:30",
+    category: "SNS",
+    memo: "인스타 주제 정하기",
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const totalMinutes = dummyEntries.reduce(
+    (sum, entry) => sum + getDuration(entry.start, entry.end),
+    0,
+  );
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <h1>Uploop</h1>
+      <p>
+        기록 {dummyEntries.length}개 · 총 {formatDuration(totalMinutes)}
+      </p>
+      <EntryList entries={dummyEntries} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
