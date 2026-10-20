@@ -1,3 +1,4 @@
+import { useState } from "react";
 import EntryList from "./components/EntryList";
 import { getDuration, formatDuration } from "./utils/time";
 
@@ -37,18 +38,33 @@ const dummyEntries = [
 ];
 
 function App() {
-  const totalMinutes = dummyEntries.reduce(
+  const [entries, setEntries] = useState(dummyEntries);
+
+  const totalMinutes = entries.reduce(
     (sum, entry) => sum + getDuration(entry.start, entry.end),
     0,
   );
 
+  const handleTestAdd = () => {
+    const newEntry = {
+      id: Date.now(),
+      date: "2026-10-15",
+      start: "20:00",
+      end: "20:40",
+      category: "코딩",
+      memo: "테스트",
+    };
+    setEntries([...entries, newEntry]);
+  };
+
   return (
     <>
       <h1>Uploop</h1>
+      <button onClick={handleTestAdd}>테스트 추가</button>
       <p>
-        기록 {dummyEntries.length}개 · 총 {formatDuration(totalMinutes)}
+        기록 {entries.length}개 · 총 {formatDuration(totalMinutes)}
       </p>
-      <EntryList entries={dummyEntries} />
+      <EntryList entries={entries} />
     </>
   );
 }
