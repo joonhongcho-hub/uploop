@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EntryList from "./components/EntryList";
 import { getDuration, formatDuration } from "./utils/time";
+import EntryForm from "./components/EntryForm";
 
 const dummyEntries = [
   {
@@ -60,6 +61,7 @@ function App() {
   return (
     <>
       <h1>Uploop</h1>
+      <EntryForm />
       <button onClick={handleTestAdd}>테스트 추가</button>
       <p>
         기록 {entries.length}개 · 총 {formatDuration(totalMinutes)}
