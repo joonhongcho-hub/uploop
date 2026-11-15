@@ -46,23 +46,14 @@ function App() {
     0,
   );
 
-  const handleTestAdd = () => {
-    const newEntry = {
-      id: Date.now(),
-      date: "2026-10-15",
-      start: "20:00",
-      end: "20:40",
-      category: "코딩",
-      memo: "테스트",
-    };
-    setEntries([...entries, newEntry]);
+  const addEntry = (entry) => {
+    setEntries([entry, ...entries]);
   };
 
   return (
     <>
       <h1>Uploop</h1>
-      <EntryForm />
-      <button onClick={handleTestAdd}>테스트 추가</button>
+      <EntryForm onAdd={addEntry} />
       <p>
         기록 {entries.length}개 · 총 {formatDuration(totalMinutes)}
       </p>
