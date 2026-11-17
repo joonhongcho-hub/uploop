@@ -12,6 +12,7 @@ function EntryForm({ onAdd }) {
       <label>
         날짜
         <input
+          id="date"
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
@@ -21,6 +22,7 @@ function EntryForm({ onAdd }) {
       <label>
         시작
         <input
+          id="start"
           type="time"
           value={start}
           onChange={(e) => setStart(e.target.value)}
@@ -30,6 +32,7 @@ function EntryForm({ onAdd }) {
       <label>
         종료
         <input
+          id="end"
           type="time"
           value={end}
           onChange={(e) => setEnd(e.target.value)}
@@ -39,6 +42,7 @@ function EntryForm({ onAdd }) {
       <label>
         카테고리
         <input
+          id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
@@ -46,13 +50,17 @@ function EntryForm({ onAdd }) {
       </label>
       <label>
         메모
-        <input value={memo} onChange={(e) => setMemo(e.target.value)} />
+        <input
+          id="memo"
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+        />
       </label>
       <button
         type="submit"
         onClick={(e) => {
-          onAdd({ date, start, end, category, memo });
           e.preventDefault();
+          onAdd({ id: Date.now(), date, start, end, category, memo });
         }}
       >
         추가
