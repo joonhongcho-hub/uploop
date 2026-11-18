@@ -52,7 +52,6 @@ function App() {
 
   const onDelete = (id) => {
     setEntries(entries.filter((item) => item.id !== id));
-    console.log("삭제요청" + id);
   };
 
   return (
