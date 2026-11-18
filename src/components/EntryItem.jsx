@@ -1,6 +1,6 @@
 import { getDuration, formatDuration } from "../utils/time";
 
-function EntryItem({ entry }) {
+function EntryItem({ entry, onDelete }) {
   const duration = getDuration(entry.start, entry.end);
 
   return (
@@ -12,6 +12,12 @@ function EntryItem({ entry }) {
         </span>
       </div>
       <p className="entry-memo">{entry.memo}</p>
+      <button
+        onClick={() => onDelete(entry.id)}
+        style={{ marginBottom: "3rem" }}
+      >
+        삭제
+      </button>
     </li>
   );
 }

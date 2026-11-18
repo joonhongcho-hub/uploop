@@ -50,6 +50,11 @@ function App() {
     setEntries([entry, ...entries]);
   };
 
+  const onDelete = (id) => {
+    setEntries(entries.filter((item) => item.id !== id));
+    console.log("삭제요청" + id);
+  };
+
   return (
     <>
       <h1>Uploop</h1>
@@ -57,7 +62,7 @@ function App() {
       <p>
         기록 {entries.length}개 · 총 {formatDuration(totalMinutes)}
       </p>
-      <EntryList entries={entries} />
+      <EntryList entries={entries} onDelete={onDelete} />
     </>
   );
 }
